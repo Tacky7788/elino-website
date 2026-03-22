@@ -324,17 +324,19 @@ code {
   color: var(--text-muted);
 }
 
-/* Hero Visual - Orbit */
+/* Hero Visual - Screenshot */
 .hero-visual {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 400px;
-  height: 400px;
-  z-index: 1;
-  opacity: 0.15;
-  pointer-events: none;
+  position: relative;
+  width: 100%;
+  max-width: 700px;
+  margin: 40px auto 0;
+  z-index: 2;
+}
+.hero-screenshot {
+  width: 100%;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-lg), 0 0 40px var(--accent-glow);
 }
 .orbit-container {
   position: relative;
