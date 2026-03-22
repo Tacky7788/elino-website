@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ELINO — AIデスクトップコンパニオン</title>
+  <meta name="description" content="Live2D / VRM キャラクターが常駐するAIデスクトップコンパニオン。マルチLLM対応、音声入出力、感情システム搭載。">
+  <meta property="og:title" content="ELINO — AIデスクトップコンパニオン">
+  <meta property="og:description" content="あなただけのAIコンパニオン、デスクトップに。Live2D/VRM対応、マルチLLM、音声、感情システム搭載。">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="images/icon.png">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" href="images/icon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Sans+JP:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===== Navbar ===== -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a class="nav-logo" href="#">
+        <img src="images/icon.png" alt="" width="32" height="32">
+        <span>ELINO</span>
+      </a>
+      <div class="nav-links" id="nav-links">
+        <a href="#features">
+          <span data-lang="ja" class="active">特徴</span>
+          <span data-lang="en">Features</span>
+        </a>
+        <a href="#setup">
+          <span data-lang="ja" class="active">始め方</span>
+          <span data-lang="en">Setup</span>
+        </a>
+        <a href="#comparison">
+          <span data-lang="ja" class="active">比較</span>
+          <span data-lang="en">Compare</span>
+        </a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <div class="lang-toggle">
+        <button class="lang-btn active" id="btn-ja" onclick="setLang('ja')">JA</button>
+        <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+      </div>
+      <div class="nav-actions">
+        <a href="https://github.com/Tacky7788/Project-elino/releases/latest" class="btn btn-primary btn-sm">
+          <span data-lang="ja" class="active">ダウンロード</span>
+          <span data-lang="en">Download</span>
+        </a>
+        <a href="https://github.com/Tacky7788/Project-elino" class="btn btn-ghost btn-sm" target="_blank" rel="noopener">GitHub</a>
+      </div>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="メニュー">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ===== Hero ===== -->
+  <section class="hero" id="hero">
+    <canvas class="hero-canvas" id="hero-canvas"></canvas>
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span data-lang="ja" class="active">Open Source &amp; Free</span>
+        <span data-lang="en">Open Source &amp; Free</span>
+      </div>
+      <h1>
+        <span data-lang="ja" class="active">あなただけのAIコンパニオン、<br>デスクトップに。</span>
+        <span data-lang="en">Your AI companion,<br>always by your side.</span>
+      </h1>
+      <p class="hero-sub">
+        <span data-lang="ja" class="active">Live2D / VRM キャラクターが常駐し、会話を重ねるほど成長する。<br>マルチLLM対応、音声入出力、感情システム搭載のデスクトップAIアプリ。</span>
+        <span data-lang="en">A desktop companion with Live2D/VRM characters that remembers you, feels emotions, and talks with voice. Multi-LLM support, voice I/O, emotion system.</span>
+      </p>
+      <div class="hero-buttons">
+        <a href="https://github.com/Tacky7788/Project-elino/releases/latest" class="btn btn-primary btn-lg">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span data-lang="ja" class="active">無料ダウンロード</span>
+          <span data-lang="en">Free Download</span>
+        </a>
+        <a href="https://github.com/Tacky7788/Project-elino" class="btn btn-outline btn-lg" target="_blank" rel="noopener">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          GitHub
+        </a>
+      </div>
+      <p class="hero-note">
+        <span data-lang="ja" class="active">Windows対応 / MIT License / Node.js 18+</span>
+        <span data-lang="en">Windows / MIT License / Node.js 18+</span>
+      </p>
+    </div>
+    <div class="hero-visual" id="hero-visual">
+      <div class="orbit-container">
+        <div class="orbit-center">
+          <img src="images/icon.png" alt="ELINO" width="80" height="80">
+        </div>
+        <div class="orbit-ring">
+          <div class="orbit-item" style="--i:0" title="Live2D/VRM">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          <div class="orbit-item" style="--i:1" title="マルチLLM">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a4 4 0 0 1 4 4c0 1.95-1.4 3.57-3.25 3.92A2.5 2.5 0 0 0 10 12.5V14"/><circle cx="12" cy="18" r="2"/><path d="M6 8a6 6 0 0 1 12 0"/></svg>
+          </div>
+          <div class="orbit-item" style="--i:2" title="音声">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/></svg>
+          </div>
+          <div class="orbit-item" style="--i:3" title="感情">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </div>
+          <div class="orbit-item" style="--i:4" title="記憶">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          </div>
+          <div class="orbit-item" style="--i:5" title="配信">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Features ===== -->
+  <section class="features" id="features">
+    <div class="container">
+      <div class="section-header" data-reveal>
+        <span class="section-label">Features</span>
+        <h2>
+          <span data-lang="ja" class="active">できること</span>
+          <span data-lang="en">What It Can Do</span>
+        </h2>
+        <p>
+          <span data-lang="ja" class="active">AIコンパニオンを自分好みにカスタマイズ</span>
+          <span data-lang="en">Customize your AI companion</span>
+        </p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card" data-reveal data-delay="0">
+          <div class="feature-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          <h3>
+            <span data-lang="ja" class="active">Live2D / VRM 対応</span>
+            <span data-lang="en">Live2D / VRM Support</span>
+          </h3>
+          <p>
+            <span data-lang="ja" class="active">お好みの2D・3Dキャラクターモデルをデスクトップに表示。位置・サイズ・カメラ角度を自由に調整。</span>
+            <span data-lang="en">Display your favorite 2D/3D character models on your desktop. Freely adjust position, size, and camera angle.</span>
+          </p>
+        </div>
+        <div class="feature-card" data-reveal data-delay="100">
+          <div class="feature-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+          <h3>
+            <span data-lang="ja" class="active">マルチLLM</span>
+            <span data-lang="en">Multi-LLM</span>
+          </h3>
+          <p>
+            <span data-lang="ja" class="active">Claude, GPT, Gemini, Groq, DeepSeek, Ollama など20以上のプロバイダに対応。好きなモデルで自然な会話を楽しめます。</span>
+            <span data-lang="en">Compatible with Claude, GPT, Gemini, Groq, DeepSeek, and 20+ providers. Enjoy natural conversations with your favorite model.</span>
+          </p>
+        </div>
+        <div class="feature-card" data-reveal data-delay="200">
+          <div class="feature-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/></svg>
+          </div>
+          <h3>
+            <span data-lang="ja" class="active">音声入出力</span>
+            <span data-lang="en">Voice I/O</span>
+          </h3>
+          <p>
+            <span data-lang="ja" class="active">Whisper音声認識 + VOICEVOX / OpenAI TTS / ElevenLabs 等の読み上げ。ハンズフリー会話が可能。8つのTTSエンジン搭載。</span>
+            <span data-lang="en">Whisper speech recognition + VOICEVOX / OpenAI TTS / ElevenLabs and more. 8 TTS engines for hands-free conversation.</span>
+          </p>
+        </div>
+        <div class="feature-card" data-reveal data-delay="0">
+          <div class="feature-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </div>
+          <h3>
+            <span data-lang="ja" class="active">感情システム</span>
+            <span data-lang="en">Emotion System</span>
+          </h3>
+          <p>
+            <span data-lang="ja" class="active">8次元の感情モデルが表情・モーション・話し方を動的に変化。会話に応じて喜怒哀楽を表現。</span>
+            <span data-lang="en">8-axis emotional model dynamically changes expressions, motions, and speech. Responds with joy, sadness, and more.</span>
+          </p>
+        </div>
+        <div class="feature-card" data-reveal data-delay="100">
+          <div class="feature-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          </div>
+          <h3>
+            <span data-lang="ja" class="active">記憶 &amp; 成長</span>
+            <span data-lang="en">Memory &amp; Growth</span>
+          </h3>
+          <p>
+            <span data-lang="ja" class="active">会話から事実や関係性を自動記憶。話すほどあなたのことを理解し、パーソナライズされた会話に。</span>
+            <span data-lang="en">Automatically remembers facts and relationships from conversations. The more you talk, the more personalized it becomes.</span>
+          </p>
+        </div>
+        <div class="feature-card" data-reveal data-delay="200">
+          <div class="feature-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+          </div>
+          <h3>
+            <span data-lang="ja" class="active">配信モード</span>
+            <span data-lang="en">Streaming Mode</span>
+          </h3>
+          <p>
+            <span data-lang="ja" class="active">YouTube Live / わんコメ連携、字幕表示、視聴者コメント自動応答。VTuber配信のお供に。</span>
+            <span data-lang="en">YouTube Live / OneComme integration, subtitle display, automatic viewer comment responses. Perfect for VTuber streaming.</span>
+          </p>
+        </div>
+        <div class="feature-card" data-reveal data-delay="0">
+          <div class="feature-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12a10 10 0 0 1 20 0"/><path d="M2 12a14 14 0 0 1 4-4"/><path d="M22 12a14 14 0 0 0-4-4"/><circle cx="8" cy="14" r="3"/><circle cx="16" cy="14" r="3"/></svg>
+          </div>
+          <h3>
+            <span data-lang="ja" class="active">VRChat連携</span>
+            <span data-lang="en">VRChat Integration</span>
+          </h3>
+          <p>
+            <span data-lang="ja" class="active">OSCチャットボックスでVRChat内プレイヤーと会話。アバターパラメータ連動で表情も変化。</span>
+            <span data-lang="en">Chat with VRChat players via OSC chatbox. Avatar parameter sync for expression changes.</span>
+          </p>
+        </div>
+        <div class="feature-card" data-reveal data-delay="100">
+          <div class="feature-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+          </div>
+          <h3>
+            <span data-lang="ja" class="active">Claude Code連携</span>
+            <span data-lang="en">Claude Code Bridge</span>
+          </h3>
+          <p>
+            <span data-lang="ja" class="active">CLIセッションに接続して、AIパワードの開発をコンパニオンと一緒に。</span>
+            <span data-lang="en">Connect to a running CLI session for AI-powered development with your companion.</span>
+          </p>
+        </div>
+        <div class="feature-card" data-reveal data-delay="200">
+          <div class="feature-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h3>
+            <span data-lang="ja" class="active">キャラクタースロット</span>
+            <span data-lang="en">Character Slots</span>
+          </h3>
+          <p>
+            <span data-lang="ja" class="active">複数のコンパニオンを作成・切替。それぞれ独立した記憶・人格・外見を持つ。</span>
+            <span data-lang="en">Create and switch between multiple companions. Each has independent memory, personality, and appearance.</span>
+          </p>
+        </div>
+        <div class="feature-card feature-card--last-row" data-reveal data-delay="0">
+          <div class="feature-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <h3>
+            <span data-lang="ja" class="active">プロアクティブ発話</span>
+            <span data-lang="en">Proactive Speech</span>
+          </h3>
+          <p>
+            <span data-lang="ja" class="active">沈黙が続くと、コンパニオンが自分から話しかける。ランダムじゃなく、文脈に合った話題で。</span>
+            <span data-lang="en">When you've been quiet, your companion reaches out. Not random — always something relevant.</span>
+          </p>
+        </div>
+        <div class="feature-card feature-card--last-row" data-reveal data-delay="100">
+          <div class="feature-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22V8"/><path d="M5 12H2a10 10 0 0 0 20 0h-3"/><path d="M8 5.2C8 3.4 9.8 2 12 2s4 1.4 4 3.2c0 2.4-4 4.8-4 4.8S8 7.6 8 5.2z"/></svg>
+          </div>
+          <h3>
+            <span data-lang="ja" class="active">セルフグロース</span>
+            <span data-lang="en">Self-Growth</span>
+          </h3>
+          <p>
+            <span data-lang="ja" class="active">会話から性格や話し方を学習し、徐々に成長。変化には確認ダイアログで承認が必要。</span>
+            <span data-lang="en">Learns personality and speech style from conversations. Changes require your approval via confirmation dialog.</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Setup ===== -->
+  <section class="setup" id="setup">
+    <div class="container">
+      <div class="section-header" data-reveal>
+        <span class="section-label">Getting Started</span>
+        <h2>
+          <span data-lang="ja" class="active">3ステップで始められる</span>
+          <span data-lang="en">Get Started in 3 Steps</span>
+        </h2>
+      </div>
+      <div class="steps">
+        <div class="step" data-reveal data-delay="0">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h3>
+              <span data-lang="ja" class="active">ダウンロード &amp; インストール</span>
+              <span data-lang="en">Download &amp; Install</span>
+            </h3>
+            <p>
+              <span data-lang="ja" class="active">GitHubリリースページからインストーラーをダウンロード。<br>または <code>git clone</code> してビルド。</span>
+              <span data-lang="en">Download the installer from the GitHub releases page. Or git clone and build.</span>
+            </p>
+          </div>
+        </div>
+        <div class="step-connector"></div>
+        <div class="step" data-reveal data-delay="150">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h3>
+              <span data-lang="ja" class="active">APIキーを設定</span>
+              <span data-lang="en">Set API Key</span>
+            </h3>
+            <p>
+              <span data-lang="ja" class="active">使いたいLLMのAPIキーを設定画面で入力。<br>Claude / OpenAI / Gemini / Groq / DeepSeek 他20以上に対応。</span>
+              <span data-lang="en">Enter the API key for your chosen LLM in the settings. Compatible with Claude / OpenAI / Gemini / Groq / DeepSeek and 20+ more.</span>
+            </p>
+          </div>
+        </div>
+        <div class="step-connector"></div>
+        <div class="step" data-reveal data-delay="300">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h3>
+              <span data-lang="ja" class="active">話しかけるだけ</span>
+              <span data-lang="en">Just Talk</span>
+            </h3>
+            <p>
+              <span data-lang="ja" class="active">初回セットアップウィザードでキャラクターの名前と口調を決めたら、<br>あとはデスクトップのキャラクターに話しかけるだけ。</span>
+              <span data-lang="en">Set your character's name and speech style in the setup wizard, then just talk to the character on your desktop.</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Comparison ===== -->
+  <section class="comparison" id="comparison">
+    <div class="container">
+      <div class="section-header" data-reveal>
+        <span class="section-label">Comparison</span>
+        <h2>
+          <span data-lang="ja" class="active">他との比較</span>
+          <span data-lang="en">How We Compare</span>
+        </h2>
+      </div>
+      <div class="comparison-table-wrapper" data-reveal>
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>
+                <span data-lang="ja" class="active">機能</span>
+                <span data-lang="en">Feature</span>
+              </th>
+              <th>ELINO</th>
+              <th>Character.AI</th>
+              <th>Replika</th>
+              <th>Desktop Mate</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <span data-lang="ja" class="active">プラットフォーム</span>
+                <span data-lang="en">Platform</span>
+              </td>
+              <td>Desktop</td>
+              <td>Web</td>
+              <td>Mobile</td>
+              <td>Desktop</td>
+            </tr>
+            <tr>
+              <td>
+                <span data-lang="ja" class="active">記憶</span>
+                <span data-lang="en">Memory</span>
+              </td>
+              <td>
+                <span data-lang="ja" class="active">✅ 意味記憶+忘却曲線</span>
+                <span data-lang="en">✅ Semantic + forgetting</span>
+              </td>
+              <td>❌</td>
+              <td>
+                <span data-lang="ja" class="active">⚠️ 限定的</span>
+                <span data-lang="en">⚠️ Limited</span>
+              </td>
+              <td>❌</td>
+            </tr>
+            <tr>
+              <td>
+                <span data-lang="ja" class="active">感情</span>
+                <span data-lang="en">Emotions</span>
+              </td>
+              <td>
+                <span data-lang="ja" class="active">✅ 8軸モデル</span>
+                <span data-lang="en">✅ 8-axis</span>
+              </td>
+              <td>❌</td>
+              <td>
+                <span data-lang="ja" class="active">⚠️ 基本的</span>
+                <span data-lang="en">⚠️ Basic</span>
+              </td>
+              <td>❌</td>
+            </tr>
+            <tr>
+              <td>Live2D/VRM</td>
+              <td>
+                <span data-lang="ja" class="active">✅ 両対応</span>
+                <span data-lang="en">✅ Both</span>
+              </td>
+              <td>❌</td>
+              <td>❌</td>
+              <td>⚠️ Live2D</td>
+            </tr>
+            <tr>
+              <td>
+                <span data-lang="ja" class="active">音声 (STT+TTS)</span>
+                <span data-lang="en">Voice (STT+TTS)</span>
+              </td>
+              <td>
+                <span data-lang="ja" class="active">✅ 8エンジン</span>
+                <span data-lang="en">✅ 8 engines</span>
+              </td>
+              <td>⚠️</td>
+              <td>✅</td>
+              <td>❌</td>
+            </tr>
+            <tr>
+              <td>
+                <span data-lang="ja" class="active">AIプロバイダー</span>
+                <span data-lang="en">AI Provider</span>
+              </td>
+              <td>
+                <span data-lang="ja" class="active">✅ 20以上・選択可</span>
+                <span data-lang="en">✅ 20+ choose</span>
+              </td>
+              <td>
+                <span data-lang="ja" class="active">❌ 固定</span>
+                <span data-lang="en">❌ Locked</span>
+              </td>
+              <td>
+                <span data-lang="ja" class="active">❌ 固定</span>
+                <span data-lang="en">❌ Locked</span>
+              </td>
+              <td>❌</td>
+            </tr>
+            <tr>
+              <td>
+                <span data-lang="ja" class="active">データプライバシー</span>
+                <span data-lang="en">Data Privacy</span>
+              </td>
+              <td>
+                <span data-lang="ja" class="active">✅ 100% ローカル</span>
+                <span data-lang="en">✅ 100% local</span>
+              </td>
+              <td>❌ Cloud</td>
+              <td>❌ Cloud</td>
+              <td>
+                <span data-lang="ja" class="active">✅ ローカル</span>
+                <span data-lang="en">✅ Local</span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <span data-lang="ja" class="active">価格</span>
+                <span data-lang="en">Price</span>
+              </td>
+              <td>
+                <span data-lang="ja" class="active">無料</span>
+                <span data-lang="en">Free</span>
+              </td>
+              <td>Free/$10</td>
+              <td>Free/$20</td>
+              <td>
+                <span data-lang="ja" class="active">$15 買い切り</span>
+                <span data-lang="en">$15 one-time</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Streamer ===== -->
+  <section class="streamer" id="streamer">
+    <div class="container">
+      <div class="streamer-card" data-reveal>
+        <svg class="streamer-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+        <h2>
+          <span data-lang="ja" class="active">配信者にも。</span>
+          <span data-lang="en">Built for streamers too.</span>
+        </h2>
+        <p>
+          <span data-lang="ja" class="active">YouTubeライブチャット連携。AIが最良のコメントを選別。自動リアクション。コンテンツに集中している間、コンパニオンが視聴者を楽しませる。</span>
+          <span data-lang="en">YouTube Live Chat integration. AI picks the best comments. Automatic reactions. Your companion entertains your audience while you focus on your content.</span>
+        </p>
+        <div class="streamer-tags">
+          <span>YouTube Live</span>
+          <span>
+            <span data-lang="ja" class="active">AIコメントフィルター</span>
+            <span data-lang="en">AI Comment Filter</span>
+          </span>
+          <span>
+            <span data-lang="ja" class="active">自動リアクション</span>
+            <span data-lang="en">Auto Reactions</span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FAQ ===== -->
+  <section class="faq" id="faq">
+    <div class="container">
+      <div class="section-header" data-reveal>
+        <span class="section-label">FAQ</span>
+        <h2>
+          <span data-lang="ja" class="active">よくある質問</span>
+          <span data-lang="en">Frequently Asked Questions</span>
+        </h2>
+      </div>
+      <div class="faq-list">
+        <details class="faq-item" data-reveal>
+          <summary>
+            <span>
+              <span data-lang="ja" class="active">無料で使えますか？</span>
+              <span data-lang="en">Is it free to use?</span>
+            </span>
+            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </summary>
+          <div class="faq-answer">
+            <p>
+              <span data-lang="ja" class="active">アプリ自体はMITライセンスで完全無料です。LLMのAPI利用料は各プロバイダーの料金が別途かかります。Groq等の無料プランも利用可能です。</span>
+              <span data-lang="en">The app itself is completely free under the MIT License. LLM API usage fees are charged separately by each provider. Free plans like Groq are also available.</span>
+            </p>
+          </div>
+        </details>
+        <details class="faq-item" data-reveal>
+          <summary>
+            <span>
+              <span data-lang="ja" class="active">どのLLMがおすすめですか？</span>
+              <span data-lang="en">Which LLM do you recommend?</span>
+            </span>
+            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </summary>
+          <div class="faq-answer">
+            <p>
+              <span data-lang="ja" class="active">日本語での自然な会話にはClaude (Anthropic) がおすすめです。コストを抑えたい場合はGroq (Llama) やDeepSeekも良い選択肢です。</span>
+              <span data-lang="en">Claude (Anthropic) is recommended for natural conversations. For lower cost, Groq (Llama) or DeepSeek are good alternatives.</span>
+            </p>
+          </div>
+        </details>
+        <details class="faq-item" data-reveal>
+          <summary>
+            <span>
+              <span data-lang="ja" class="active">自分のLive2D / VRMモデルは使えますか？</span>
+              <span data-lang="en">Can I use my own Live2D / VRM model?</span>
+            </span>
+            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </summary>
+          <div class="faq-answer">
+            <p>
+              <span data-lang="ja" class="active">はい。Live2D (.model3.json) と VRM (.vrm) 形式に対応しています。モデルファイルを所定のフォルダに配置するだけで使えます。</span>
+              <span data-lang="en">Yes. Live2D (.model3.json) and VRM (.vrm) formats are supported. Just place the model file in the designated folder.</span>
+            </p>
+          </div>
+        </details>
+        <details class="faq-item" data-reveal>
+          <summary>
+            <span>
+              <span data-lang="ja" class="active">Mac / Linux には対応していますか？</span>
+              <span data-lang="en">Is Mac / Linux supported?</span>
+            </span>
+            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </summary>
+          <div class="faq-answer">
+            <p>
+              <span data-lang="ja" class="active">現在はWindows版のみリリースしています。Electronベースのため将来的なMac/Linux対応は可能ですが、現時点では未対応です。</span>
+              <span data-lang="en">Currently Windows only. Since it's Electron-based, Mac/Linux support is possible in the future, but not available yet.</span>
+            </p>
+          </div>
+        </details>
+        <details class="faq-item" data-reveal>
+          <summary>
+            <span>
+              <span data-lang="ja" class="active">音声機能は必須ですか？</span>
+              <span data-lang="en">Is voice required?</span>
+            </span>
+            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </summary>
+          <div class="faq-answer">
+            <p>
+              <span data-lang="ja" class="active">いいえ。テキストチャットのみでも使えます。音声入力 (STT) と音声読み上げ (TTS) はそれぞれ個別にオン/オフ可能です。</span>
+              <span data-lang="en">No. Text chat only is fine. Voice input (STT) and voice output (TTS) can each be toggled on/off independently.</span>
+            </p>
+          </div>
+        </details>
+        <details class="faq-item" data-reveal>
+          <summary>
+            <span>
+              <span data-lang="ja" class="active">配信で使えますか？</span>
+              <span data-lang="en">Can I use it for streaming?</span>
+            </span>
+            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </summary>
+          <div class="faq-answer">
+            <p>
+              <span data-lang="ja" class="active">はい。配信モードを有効にするとOBSキャプチャ対応の字幕表示、YouTube Live / わんコメからのコメント取得・自動応答が使えます。</span>
+              <span data-lang="en">Yes. Streaming mode enables OBS-compatible subtitle display, and comment fetching/auto-responses from YouTube Live / OneComme.</span>
+            </p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Footer ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <img src="images/icon.png" alt="" width="24" height="24">
+          <span>ELINO</span>
+        </div>
+        <div class="footer-links">
+          <a href="https://github.com/Tacky7788/Project-elino" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://github.com/Tacky7788/Project-elino/releases" target="_blank" rel="noopener">
+            <span data-lang="ja" class="active">リリース</span>
+            <span data-lang="en">Releases</span>
+          </a>
+          <a href="https://github.com/Tacky7788/Project-elino/issues" target="_blank" rel="noopener">Issues</a>
+        </div>
+        <div class="footer-meta">
+          <p>MIT License &copy; 2026 rippy</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
